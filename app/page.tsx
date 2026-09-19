@@ -35,21 +35,19 @@ export default function Page() {
 
   return (
     <main className="min-h-screen bg-black text-white">
-      {/* LANGUAGE SELECTOR - TOP LEFT CORNER */}
-      <div style={{position: 'fixed', top: '70px', left: '10px', zIndex: 9999, background: 'white', padding: '5px 10px', borderRadius: '8px'}}>
-        <div id="google_translate_element"></div>
-      </div>
-      <script dangerouslySetInnerHTML={{ __html: `
-        function googleTranslateElementInit() {
-          new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-        }
-      `}} />
-      <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
-
       <nav className="sticky top-0 z-50 bg-black/90 backdrop-blur flex justify-between items-center p-5 max-w-7xl mx-auto border-b border-white/5">
-        <div className="flex items-center gap-2"><div className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center font-black text-black text-xs">G</div><div className="font-black tracking-widest text-[12px] leading-none">GRAYSCALE<br/><span className="text-yellow-500">INVESTMENT PLATFORM</span></div></div>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2"><div className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center font-black text-black text-xs">G</div><div className="font-black tracking-widest text-[12px] leading-none">GRAYSCALE<br/><span className="text-yellow-500">INVESTMENT PLATFORM</span></div></div>
+          <div className="ml-2 bg-white rounded-full px-2 py-1">
+            <div id="google_translate_element" className="scale-[0.8]"></div>
+          </div>
+        </div>
         <div className="flex gap-2"><a href="https://www.tiktok.com/@micheal.sonnenshe?_r=1&_t=ZS-99rt5sV3ygX" target="_blank" className="bg-white/10 border border-white/10 px-4 py-2 rounded-full text-xs font-bold">TikTok</a><a href="https://www.facebook.com/share/?mibextid=wwXIfr" target="_blank" className="bg-[#1877F2] px-4 py-2 rounded-full text-xs font-black">Facebook</a></div>
       </nav>
+
+      <script dangerouslySetInnerHTML={{ __html: `function googleTranslateElementInit() {new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');}`}} />
+      <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+
       <section className="max-w-7xl mx-auto p-6 md:p-10 grid md:grid-cols-2 gap-8 items-center">
         <div>
           <div className="inline-block bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-[10px] tracking-widest px-4 py-1.5 rounded-full mb-6">GLOBAL PLATFORM • 6 CONTINENTS • 1,200+ INVESTORS</div>
@@ -75,7 +73,7 @@ export default function Page() {
           <label className="text-[11px] text-zinc-400 ml-2">Investment Amount (USD) *</label>
           <input value={amount} onChange={e=>setAmount(e.target.value)} type="number" placeholder="Minimum $100" className="w-full bg-black border border-white/10 rounded-full px-5 py-3.5 mb-4 text-sm outline-none focus:border-yellow-500/50" />
           <div className="flex gap-2 mb-5"><div className="flex-1 bg-black border border-white/10 rounded-full px-5 py-3.5 text-xs text-zinc-400 truncate">{wallet? wallet.slice(0,18)+"..." : "Connect wallet (optional)"}</div><button onClick={connectWallet} className="bg-white text-black px-6 rounded-full font-black text-[11px]">{wallet? "DONE" : "CONNECT"}</button></div>
-          <button onClick={handleSignup} className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-black py-4 rounded-full">CREATE GLOBAL ACCOUNT</button>
+          <button onClick={handleSignup} className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-black py-4 rounded-full">Invest</button>
         </div>
       </section>
       <section className="max-w-7xl mx-auto p-6 md:p-10">
