@@ -1,7 +1,0 @@
-@import "tailwindcss";
-:root { --background: #070708; --foreground: #fff; }
-body { background: var(--background); color: var(--foreground); font-family: var(--font-geist-sans), sans-serif; }
-@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
-.float { animation: float 4s ease-in-out infinite; }
-.glow { box-shadow: 0 0 30px rgba(34,197,94,0.4); }
-.gradient { background: linear-gradient(90deg,#22c55e,#86efac); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
