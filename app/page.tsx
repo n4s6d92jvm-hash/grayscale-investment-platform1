@@ -35,6 +35,17 @@ export default function Page() {
 
   return (
     <main className="min-h-screen bg-black text-white">
+      {/* LANGUAGE SELECTOR - TOP LEFT CORNER */}
+      <div style={{position: 'fixed', top: '70px', left: '10px', zIndex: 9999, background: 'white', padding: '5px 10px', borderRadius: '8px'}}>
+        <div id="google_translate_element"></div>
+      </div>
+      <script dangerouslySetInnerHTML={{ __html: `
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+      `}} />
+      <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+
       <nav className="sticky top-0 z-50 bg-black/90 backdrop-blur flex justify-between items-center p-5 max-w-7xl mx-auto border-b border-white/5">
         <div className="flex items-center gap-2"><div className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center font-black text-black text-xs">G</div><div className="font-black tracking-widest text-[12px] leading-none">GRAYSCALE<br/><span className="text-yellow-500">INVESTMENT PLATFORM</span></div></div>
         <div className="flex gap-2"><a href="https://www.tiktok.com/@micheal.sonnenshe?_r=1&_t=ZS-99rt5sV3ygX" target="_blank" className="bg-white/10 border border-white/10 px-4 py-2 rounded-full text-xs font-bold">TikTok</a><a href="https://www.facebook.com/share/?mibextid=wwXIfr" target="_blank" className="bg-[#1877F2] px-4 py-2 rounded-full text-xs font-black">Facebook</a></div>
@@ -82,15 +93,6 @@ export default function Page() {
         <div className="grid md:grid-cols-3 gap-6">
           <div className="md:col-span-2 border border-white/10 rounded-[2rem] p-8 bg-zinc-900/30"><h2 className="text-yellow-500 text-xs tracking-widest mb-4">ABOUT GRAYSCALE INVESTMENT PLATFORM - GLOBAL</h2><h3 className="text-2xl font-bold mb-4">The Future Of Digital Wealth Management Across All Continents</h3><p className="text-zinc-400 text-sm leading-7">Founded in 2026, Grayscale Investment Platform was created to serve investors worldwide - from North America, South America, Europe, Africa, Asia, to Australia. We bridge traditional finance and decentralized finance for a truly global audience.<br/><br/>Our platform uses advanced algorithmic trading, staking protocols, and liquidity provision to generate sustainable yields for investors in every time zone. Every investment is tracked on-chain, and our vaults are audited quarterly by international firms.<br/><br/><span className="text-white font-bold">Global coverage:</span> United States, Canada, United Kingdom, Germany, France, Nigeria, South Africa, Kenya, India, UAE, Brazil, Australia and 100+ other countries. Real human support via our official social channels, no bots, available 24/7 worldwide.</p></div>
           <div className="space-y-4"><div className="border border-yellow-500/20 bg-yellow-500/5 rounded-[1.5rem] p-6"><div className="text-yellow-500 font-bold text-sm mb-2">WORLDWIDE & SECURE</div><div className="text-xs text-zinc-400">Serving 6 continents with military-grade encryption, cold wallet storage, global 2FA protection.</div></div><div className="border border-white/10 rounded-[1.5rem] p-6 bg-white/5"><div className="font-bold text-sm mb-2">GLOBAL DAILY PAYOUTS</div><div className="text-xs text-zinc-400">Profits distributed daily to any country via crypto or local bank transfer.</div></div><div className="border border-white/10 rounded-[1.5rem] p-6 bg-white/5"><div className="font-bold text-sm mb-2">24/7 GLOBAL SUPPORT</div><div className="text-xs text-zinc-400 mb-3">Reach us on our official pages:</div><div className="flex flex-col gap-2"><a href="https://www.tiktok.com/@micheal.sonnenshe?_r=1&_t=ZS-99rt5sV3ygX" target="_blank" className="text-xs bg-white/10 rounded-full py-2 text-center">TikTok: @micheal.sonnenshe</a><a href="https://www.facebook.com/share/?mibextid=wwXIfr" target="_blank" className="text-xs bg-[#1877F2]/20 text-[#6aa9ff] rounded-full py-2 text-center">Facebook Page</a></div></div></div>
-        </div>
-      </section>
-      <section className="max-w-7xl mx-auto p-6 md:p-10">
-        <h2 className="text-center text-3xl font-black mb-2">How It Works Globally</h2>
-        <p className="text-center text-zinc-500 text-sm mb-10">For investors in North America, Europe, Asia, Africa, South America & Australia</p>
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="border border-white/10 rounded-3xl p-8 text-center bg-gradient-to-b from-white/5 to-transparent"><div className="w-12 h-12 rounded-full bg-yellow-500 text-black font-black flex items-center justify-center mx-auto mb-4">1</div><div className="font-bold mb-2">Global Registration</div><div className="text-xs text-zinc-400 leading-6">Fill form from any country. Enter your WhatsApp with country code. Click Sign Up - details go to our global desk privately.</div></div>
-          <div className="border border-white/10 rounded-3xl p-8 text-center bg-gradient-to-b from-white/5 to-transparent"><div className="w-12 h-12 rounded-full bg-yellow-500 text-black font-black flex items-center justify-center mx-auto mb-4">2</div><div className="font-bold mb-2">Fund From Anywhere</div><div className="text-xs text-zinc-400 leading-6">We support USD, EUR, GBP, NGN and crypto. Our team will guide you via private chat from your continent.</div></div>
-          <div className="border border-yellow-500/30 rounded-3xl p-8 text-center bg-yellow-500/5"><div className="w-12 h-12 rounded-full bg-yellow-500 text-black font-black flex items-center justify-center mx-auto mb-4">3</div><div className="font-bold mb-2">Earn Worldwide</div><div className="text-xs text-zinc-400 leading-6">Start earning 12.4% APY daily. Withdraw to any country anytime via private request.</div></div>
         </div>
       </section>
       <section className="max-w-7xl mx-auto p-6 md:p-10">
