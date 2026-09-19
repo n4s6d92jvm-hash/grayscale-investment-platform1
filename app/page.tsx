@@ -25,7 +25,7 @@ export default function Page() {
       alert("Please fill all fields");
       return;
     }
-    const text = `*NEW GLOBAL INVESTOR - Grayscale Investment Platform*%0A%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Investment:* $${encodeURIComponent(amount)}%0A*Wallet:* ${wallet? encodeURIComponent(wallet) : "Not Connected"}%0A*Region:* Global Investor%0A%0AHi Grayscale Team, I want to start investing globally.`;
+    const text = `*NEW GLOBAL INVESTOR - Grayscale Investment Platform*%0A%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Investment:* $${encodeURIComponent(amount)}%0A*Wallet:* ${wallet? encodeURIComponent(wallet) : "Not Connected"}%0A%0AHi Grayscale Team, I want to start investing globally.`;
     window.open(`https://wa.me/2349116438322?text=${text}`, "_blank");
   };
 
@@ -56,6 +56,10 @@ export default function Page() {
             <div className="border border-white/10 rounded-2xl px-5 py-3 bg-white/5"><div className="font-black">$2.4M+</div><div className="text-[10px] text-zinc-500">Managed Globally</div></div>
             <div className="border border-white/10 rounded-2xl px-5 py-3 bg-white/5"><div className="font-black">6 CONTINENTS</div><div className="text-[10px] text-zinc-500">Worldwide</div></div>
           </div>
+          <div className="grid grid-cols-2 gap-3 mt-6">
+            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=500&q=80" alt="Trading chart" className="rounded-2xl border border-white/10 h-32 object-cover w-full"/>
+            <img src="https://images.unsplash.com/photo-1559526324-4f8172775c6b?w=500&q=80" alt="Trading laptop" className="rounded-2xl border border-white/10 h-32 object-cover w-full"/>
+          </div>
         </div>
 
         <div className="border border-yellow-500/20 bg-gradient-to-b from-zinc-900 to-black rounded-[2rem] p-7">
@@ -76,16 +80,16 @@ export default function Page() {
         </div>
       </section>
 
-      {/* NEW SECTION - YOUR 5 PHOTOS ADDED HERE */}
+      {/* PHOTOS SECTION - NOW WITH WORKING ONLINE LINKS */}
       <section className="max-w-7xl mx-auto p-6 md:p-10">
         <h2 className="text-center text-3xl font-black mb-2">Live Global Trading Insights</h2>
         <p className="text-center text-zinc-500 text-sm mb-8">Real-time charts, professional analysis, worldwide portfolio management</p>
         <div className="grid md:grid-cols-3 gap-4">
-          <div className="md:col-span-2 rounded-[2rem] overflow-hidden border border-white/10 h-[300px]"><img src="/1.jpg" alt="Market overview" className="w-full h-full object-cover"/></div>
-          <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px]"><img src="/2.jpg" alt="Trading analysis" className="w-full h-full object-cover"/></div>
-          <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px]"><img src="/5.jpg" alt="Investment meeting" className="w-full h-full object-cover"/></div>
-          <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px]"><img src="/3.jpg" alt="Trading" className="w-full h-full object-cover"/></div>
-          <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px]"><img src="/4.jpg" alt="Charts" className="w-full h-full object-cover"/></div>
+          <div className="md:col-span-2 rounded-[2rem] overflow-hidden border border-white/10 h-[300px]"><img src="https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=1000&q=80" alt="Market overview" className="w-full h-full object-cover"/></div>
+          <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px]"><img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80" alt="Trading analysis" className="w-full h-full object-cover"/></div>
+          <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px]"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80" alt="Investment meeting" className="w-full h-full object-cover"/></div>
+          <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px]"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80" alt="Trading" className="w-full h-full object-cover"/></div>
+          <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px]"><img src="https://images.unsplash.com/photo-1559526324-4f8172775c6b?w=600&q=80" alt="Charts" className="w-full h-full object-cover"/></div>
         </div>
       </section>
 
@@ -142,7 +146,7 @@ export default function Page() {
           <a href="https://www.tiktok.com/@micheal.sonnenshe?_r=1&_t=ZS-99rt5sV3ygX" target="_blank" className="border border-white/10 px-6 py-2 rounded-full text-xs">TikTok</a>
           <a href="https://www.facebook.com/share/?mibextid=wwXIfr" target="_blank" className="border border-white/10 px-6 py-2 rounded-full text-xs">Facebook</a>
         </div>
-        <div className="text-zinc-500 text-xs mt-4 max-w-2xl mx-auto leading-6">Serving investors across North America, South America, Europe, Africa, Asia & Australia. Reach us via TikTok & Facebook. Official website: my-crypto-site1.vercel.app</div>
+        <div className="text-zinc-500 text-xs mt-4 max-w-2xl mx-auto leading-6">Serving investors across North America, South America, Europe, Africa, Asia & Australia. Reach us via TikTok & Facebook.</div>
         <div className="text-zinc-700 text-[10px] mt-4">© 2026 GRAYSCALE INVESTMENT PLATFORM • GLOBAL</div>
       </footer>
     </main>
