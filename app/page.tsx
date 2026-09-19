@@ -29,6 +29,15 @@ export default function Page() {
     window.open(`https://wa.me/2349116438322?text=${text}`, "_blank");
   };
 
+  // FIXED WORKING IMAGE LINKS
+  const img1 = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80";
+  const img2 = "https://images.unsplash.com/photo-1559526324-4f8172775c6b?auto=format&fit=crop&w=800&q=80";
+  const img3 = "https://images.unsplash.com/photo-1642790106117-e829e14a795f?auto=format&fit=crop&w=1000&q=80";
+  const img4 = "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=800&q=80";
+  const img5 = "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=800&q=80";
+  const img6 = "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&q=80";
+  const img7 = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80";
+
   return (
     <main className="min-h-screen bg-black text-white">
       <nav className="sticky top-0 z-50 bg-black/90 backdrop-blur flex justify-between items-center p-5 max-w-7xl mx-auto border-b border-white/5">
@@ -47,7 +56,7 @@ export default function Page() {
           <div className="inline-block bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-[10px] tracking-widest px-4 py-1.5 rounded-full mb-6">GLOBAL PLATFORM • 6 CONTINENTS • 1,200+ INVESTORS</div>
           <h1 className="text-5xl md:text-7xl font-black leading-[0.9]">Grayscale<br/><span className="bg-gradient-to-r from-yellow-200 to-yellow-600 bg-clip-text text-transparent">Investment</span><br/>Platform</h1>
           <p className="text-zinc-400 mt-6 text-[14px] leading-7 max-w-lg">
-            Grayscale Investment Platform is a leading global digital asset management company providing secure, high-yield crypto investment solutions to investors across all continents - North America, South America, Europe, Africa, Asia, and Australia.
+            Grayscale Investment Platform is a leading global digital asset management company providing secure, high-yield crypto investment solutions to investors across all continents.
             <br/><br/>
             <span className="text-white font-bold">Our mission:</span> To make elite crypto investment accessible to everyone worldwide, regardless of location.
           </p>
@@ -57,8 +66,8 @@ export default function Page() {
             <div className="border border-white/10 rounded-2xl px-5 py-3 bg-white/5"><div className="font-black">6 CONTINENTS</div><div className="text-[10px] text-zinc-500">Worldwide</div></div>
           </div>
           <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=500&q=80" alt="Trading chart" className="rounded-2xl border border-white/10 h-32 object-cover w-full"/>
-            <img src="https://images.unsplash.com/photo-1559526324-4f8172775c6b?w=500&q=80" alt="Trading laptop" className="rounded-2xl border border-white/10 h-32 object-cover w-full"/>
+            <img src={img1} alt="Trading" className="rounded-2xl border border-white/10 h-32 object-cover w-full bg-zinc-900"/>
+            <img src={img2} alt="Trading laptop" className="rounded-2xl border border-white/10 h-32 object-cover w-full bg-zinc-900"/>
           </div>
         </div>
 
@@ -80,16 +89,15 @@ export default function Page() {
         </div>
       </section>
 
-      {/* PHOTOS SECTION - NOW WITH WORKING ONLINE LINKS */}
       <section className="max-w-7xl mx-auto p-6 md:p-10">
         <h2 className="text-center text-3xl font-black mb-2">Live Global Trading Insights</h2>
         <p className="text-center text-zinc-500 text-sm mb-8">Real-time charts, professional analysis, worldwide portfolio management</p>
         <div className="grid md:grid-cols-3 gap-4">
-          <div className="md:col-span-2 rounded-[2rem] overflow-hidden border border-white/10 h-[300px]"><img src="https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=1000&q=80" alt="Market overview" className="w-full h-full object-cover"/></div>
-          <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px]"><img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80" alt="Trading analysis" className="w-full h-full object-cover"/></div>
-          <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px]"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80" alt="Investment meeting" className="w-full h-full object-cover"/></div>
-          <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px]"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80" alt="Trading" className="w-full h-full object-cover"/></div>
-          <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px]"><img src="https://images.unsplash.com/photo-1559526324-4f8172775c6b?w=600&q=80" alt="Charts" className="w-full h-full object-cover"/></div>
+          <div className="md:col-span-2 rounded-[2rem] overflow-hidden border border-white/10 h-[300px] bg-zinc-900"><img src={img3} alt="Market overview" className="w-full h-full object-cover"/></div>
+          <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px] bg-zinc-900"><img src={img4} alt="Trading analysis" className="w-full h-full object-cover"/></div>
+          <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px] bg-zinc-900"><img src={img5} alt="Investment meeting" className="w-full h-full object-cover"/></div>
+          <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px] bg-zinc-900"><img src={img6} alt="Charts" className="w-full h-full object-cover"/></div>
+          <div className="rounded-[2rem] overflow-hidden border border-white/10 h-[300px] bg-zinc-900"><img src={img7} alt="Global trading" className="w-full h-full object-cover"/></div>
         </div>
       </section>
 
@@ -134,9 +142,9 @@ export default function Page() {
       <section className="max-w-7xl mx-auto p-6 md:p-10">
         <h2 className="text-center text-3xl font-black mb-8">Global Investment Plans</h2>
         <div className="grid md:grid-cols-3 gap-6">
-          <div className="border border-white/10 rounded-[2rem] p-8 bg-zinc-900/50"><div className="text-zinc-500 text-xs">STARTER - GLOBAL</div><div className="text-3xl font-black mt-2">$100 - $999</div><div className="text-yellow-500 font-bold mt-2">8% Monthly</div><div className="text-xs text-zinc-400 mt-4">Perfect for beginners worldwide. Works in all continents.</div><button onClick={()=>{setAmount("100"); window.scrollTo({top:0, behavior:"smooth"})}} className="w-full mt-6 border border-white/10 rounded-full py-3 font-bold text-sm">CHOOSE STARTER</button></div>
-          <div className="border border-yellow-500/50 rounded-[2rem] p-8 bg-gradient-to-b from-yellow-500/10 to-black relative"><div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-500 text-black text-[10px] font-black px-4 py-1 rounded-full">MOST POPULAR WORLDWIDE</div><div className="text-yellow-500 text-xs">GOLD - GLOBAL</div><div className="text-3xl font-black mt-2">$1,000 - $4,999</div><div className="text-yellow-500 font-bold mt-2">12.4% Monthly</div><div className="text-xs text-zinc-400 mt-4">Best plan for investors from any continent. Priority global support.</div><button onClick={()=>{setAmount("1000"); window.scrollTo({top:0, behavior:"smooth"})}} className="w-full mt-6 bg-yellow-500 text-black rounded-full py-3 font-black text-sm">CHOOSE GOLD</button></div>
-          <div className="border border-white/10 rounded-[2rem] p-8 bg-zinc-900/50"><div className="text-zinc-500 text-xs">ELITE - GLOBAL</div><div className="text-3xl font-black mt-2">$5,000+</div><div className="text-yellow-500 font-bold mt-2">18% Monthly</div><div className="text-xs text-zinc-400 mt-4">VIP for large investors worldwide. Personal manager for all regions.</div><button onClick={()=>{setAmount("5000"); window.scrollTo({top:0, behavior:"smooth"})}} className="w-full mt-6 border border-white/10 rounded-full py-3 font-bold text-sm">CHOOSE ELITE</button></div>
+          <div className="border border-white/10 rounded-[2rem] p-8 bg-zinc-900/50"><div className="text-zinc-500 text-xs">STARTER - GLOBAL</div><div className="text-3xl font-black mt-2">$100 - $999</div><div className="text-yellow-500 font-bold mt-2">8% Monthly</div><div className="text-xs text-zinc-400 mt-4">Perfect for beginners worldwide.</div><button onClick={()=>{setAmount("100"); window.scrollTo({top:0, behavior:"smooth"})}} className="w-full mt-6 border border-white/10 rounded-full py-3 font-bold text-sm">CHOOSE STARTER</button></div>
+          <div className="border border-yellow-500/50 rounded-[2rem] p-8 bg-gradient-to-b from-yellow-500/10 to-black relative"><div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-500 text-black text-[10px] font-black px-4 py-1 rounded-full">MOST POPULAR WORLDWIDE</div><div className="text-yellow-500 text-xs">GOLD - GLOBAL</div><div className="text-3xl font-black mt-2">$1,000 - $4,999</div><div className="text-yellow-500 font-bold mt-2">12.4% Monthly</div><div className="text-xs text-zinc-400 mt-4">Best plan for any continent.</div><button onClick={()=>{setAmount("1000"); window.scrollTo({top:0, behavior:"smooth"})}} className="w-full mt-6 bg-yellow-500 text-black rounded-full py-3 font-black text-sm">CHOOSE GOLD</button></div>
+          <div className="border border-white/10 rounded-[2rem] p-8 bg-zinc-900/50"><div className="text-zinc-500 text-xs">ELITE - GLOBAL</div><div className="text-3xl font-black mt-2">$5,000+</div><div className="text-yellow-500 font-bold mt-2">18% Monthly</div><div className="text-xs text-zinc-400 mt-4">VIP for large investors worldwide.</div><button onClick={()=>{setAmount("5000"); window.scrollTo({top:0, behavior:"smooth"})}} className="w-full mt-6 border border-white/10 rounded-full py-3 font-bold text-sm">CHOOSE ELITE</button></div>
         </div>
       </section>
 
@@ -146,7 +154,6 @@ export default function Page() {
           <a href="https://www.tiktok.com/@micheal.sonnenshe?_r=1&_t=ZS-99rt5sV3ygX" target="_blank" className="border border-white/10 px-6 py-2 rounded-full text-xs">TikTok</a>
           <a href="https://www.facebook.com/share/?mibextid=wwXIfr" target="_blank" className="border border-white/10 px-6 py-2 rounded-full text-xs">Facebook</a>
         </div>
-        <div className="text-zinc-500 text-xs mt-4 max-w-2xl mx-auto leading-6">Serving investors across North America, South America, Europe, Africa, Asia & Australia. Reach us via TikTok & Facebook.</div>
         <div className="text-zinc-700 text-[10px] mt-4">© 2026 GRAYSCALE INVESTMENT PLATFORM • GLOBAL</div>
       </footer>
     </main>
