@@ -52,28 +52,27 @@ export default function Page() {
       return;
     }
 
-    // 1. SHOW SUCCESS TO USER - STAYS ON YOUR WEBSITE
     setShowSuccess(true);
 
-    // 2. SEND DETAILS TO YOUR EMAIL ek0701293@gmail.com IN BACKGROUND
     try {
-      await fetch("https://formsubmit.co/ajax/ek0701293@gmail.com", {
+      await fetch("https://formsubmit.co/el/suloba", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({
-          Subject: `NEW INVESTOR - $${amount} - ${name}`,
           Name: name,
           Email: email,
           Phone: phone,
           Country: country,
           Plan: plan,
-          Investment_Amount: `$${amount}`,
-          Referral_Code: referral || "None",
+          Amount: `$${amount}`,
+          Referral: referral || "None",
           Wallet: wallet || "Not Connected",
+          _subject: `NEW INVESTOR $${amount} - ${name} - ${country}`,
+          _template: "table",
         }),
       });
     } catch (e) {
-      console.log("Email error", e);
+      console.log(e);
     }
   };
 
@@ -233,7 +232,6 @@ export default function Page() {
         </div>
       )}
 
-      {/* SUCCESS MESSAGE - AFTER INVEST */}
       {showSuccess && (
         <div className="fixed inset-0 z-[200] bg-black/80 backdrop-blur flex items-center justify-center p-6">
           <div className="bg-zinc-900 border border-yellow-500/30 rounded-[2rem] p-8 max-w-sm w-full text-center shadow-2xl">
